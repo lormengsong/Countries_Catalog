@@ -16,7 +16,7 @@
             <v-text-field
               v-model="search"
               append-icon="mdi-magnify"
-              label="Search"
+              label="Search Country Name"
               single-line
               hide-details
             ></v-text-field>
@@ -173,7 +173,7 @@ export default {
 
 <style scoped>
 .containers {
-  width: 80%;
+  width: 85%;
   margin: 0px auto;
 }
 .loading {
