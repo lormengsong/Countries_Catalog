@@ -5,7 +5,10 @@
         Countries Catalog Implementation
       </h1>
       <div class="loading" v-if="loading">
-        <v-progress-circular indeterminate color="#de5d0a"></v-progress-circular>
+        <v-progress-circular
+          indeterminate
+          color="#de5d0a"
+        ></v-progress-circular>
       </div>
       <div v-else>
         <div class="d-flex justify-end">
@@ -31,8 +34,8 @@
           <template v-slot:[`item.flag`]="{ item }">
             <img :src="item.flag" alt="Flag" style="width: 50px" />
           </template>
-          <template v-slot:[`item.name`]="{ item }" >
-            <span @click="showCountryDetails(item)" style="cursor: pointer;">
+          <template v-slot:[`item.name`]="{ item }">
+            <span @click="showCountryDetails(item)" style="cursor: pointer">
               {{ item.name }}
             </span>
           </template>
@@ -49,17 +52,37 @@
           </v-card-title>
           <v-card-text>
             <div v-if="selectedCountry">
-              <p><strong>Native Name:</strong> {{ selectedCountry.nativeName }}</p>
-              <p><strong>Alternative Spellings:</strong> {{ selectedCountry.altSpellings.join(', ') }}</p>
-              <p><strong>2 character Country Code:</strong> {{ selectedCountry.cca2 }}</p>
-              <p><strong>3 character Country Code:</strong> {{ selectedCountry.cca3 }}</p>
-              <p><strong>Country Calling Codes:</strong> {{ selectedCountry.idd }}</p>
-              <img :src="selectedCountry.flag" alt="Flag" style="width: 100px" />
+              <p>
+                <strong>Native Name:</strong> {{ selectedCountry.nativeName }}
+              </p>
+              <p>
+                <strong>Alternative Spellings:</strong>
+                {{ selectedCountry.altSpellings.join(", ") }}
+              </p>
+              <p>
+                <strong>2 character Country Code:</strong>
+                {{ selectedCountry.cca2 }}
+              </p>
+              <p>
+                <strong>3 character Country Code:</strong>
+                {{ selectedCountry.cca3 }}
+              </p>
+              <p>
+                <strong>Country Calling Codes:</strong>
+                {{ selectedCountry.idd }}
+              </p>
+              <img
+                :src="selectedCountry.flag"
+                alt="Flag"
+                style="width: 100px"
+              />
             </div>
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
+            <v-btn color="blue darken-1" text @click="dialog = false"
+              >Close</v-btn
+            >
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -79,7 +102,11 @@ export default {
         { text: "2 character Country Code", value: "cca2", sortable: false },
         { text: "3 character Country Code", value: "cca3", sortable: false },
         { text: "Native Country Name", value: "nativeName", sortable: false },
-        { text: "Alternative Country Name", value: "altSpellings", sortable: false },
+        {
+          text: "Alternative Country Name",
+          value: "altSpellings",
+          sortable: false,
+        },
         { text: "Country Calling Codes", value: "idd", sortable: false },
       ],
       countries: [],
@@ -98,7 +125,9 @@ export default {
         const searchLower = this.search.toLowerCase();
         return (
           country.name.toLowerCase().includes(searchLower) ||
-          country.altSpellings.some(spell => spell.toLowerCase().includes(searchLower)) ||
+          country.altSpellings.some((spell) =>
+            spell.toLowerCase().includes(searchLower)
+          ) ||
           country.nativeName?.toLowerCase().includes(searchLower) ||
           country.cca3.toLowerCase().includes(searchLower)
         );
@@ -118,7 +147,9 @@ export default {
             name: country.name.official,
             cca2: country.cca2,
             cca3: country.cca3,
-            nativeName: country.name.nativeName ? Object.values(country.name.nativeName)[0].common : "",
+            nativeName: country.name.nativeName
+              ? Object.values(country.name.nativeName)[0].common
+              : "",
             altSpellings: country.altSpellings,
             idd: country.idd.root,
           }));
