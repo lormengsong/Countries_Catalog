@@ -173,7 +173,7 @@ export default {
 
 <style scoped>
 .containers {
-  width: 85%;
+  width: 80%;
   margin: 0px auto;
 }
 .loading {
